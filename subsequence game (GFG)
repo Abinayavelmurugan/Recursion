@@ -1,0 +1,24 @@
+class Solution {
+    static boolean isVowel(char c){
+        return "aeiouAEIOU".indexOf(c)!=-1;
+    }
+    static boolean isCons(char c){
+        return Character.isLetter(c) && !isVowel(c);
+    }
+    static void generate(TreeSet<String> res, String temp,String s, int i){
+        if(i==s.length()){
+            if(!temp.isEmpty() && isVowel(temp.charAt(0)) && isCons(temp.charAt(temp.length()-1)))
+            res.add(temp);
+            return;
+        }
+       
+        generate(res,temp+s.charAt(i),s,i+1);
+        
+        generate(res,temp,s,i+1);
+    }
+    static TreeSet<String> allPossibleSubsequences(String s) {
+         TreeSet<String> res=new TreeSet<>();
+         generate(res,"",s,0);
+         return res;
+    }
+}
