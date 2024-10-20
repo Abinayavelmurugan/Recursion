@@ -1,0 +1,27 @@
+class Solution {
+
+    static void generate(Set<String> res,String s, String str, int i){
+        if(i==str.length()){
+            res.add(s);
+            return;
+        }
+        generate(res,s+str.charAt(i),str,i+1);
+        generate(res,s,str,i+1);
+    }
+ 
+    public static String betterString(String str1, String str2) {
+        
+        HashSet<String> res1=new HashSet<>();
+        HashSet<String> res2=new HashSet<>();
+        generate(res1,"",str1,0);
+        generate(res2,"",str2,0);
+        if(res1.size()>res2.size()){
+            return str1;
+        }
+        else if(res2.size()>res1.size()){
+            return str2;
+        }
+        return str1;
+        
+    }
+}
