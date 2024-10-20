@@ -1,0 +1,28 @@
+class Solution {
+   static List<String> res=new ArrayList<>();
+   static void generate(int n, int[] a, int i){
+        if(i==n){
+            StringBuilder temp=new StringBuilder();
+            for(int j=0;j<a.length;j++){
+                temp.append(a[j]);
+            }
+            if(temp.toString().contains("11")) return;
+            res.add(temp.toString());
+            return;
+            
+        }
+        a[i]=0;
+        generate(n,a,i+1);
+        a[i]=1;
+        generate(n,a,i+1);
+    }
+  public static List<String> generateBinaryStrings(int n) {
+        res.clear();
+        int[] a=new int[n];
+        generate(n,a,0);
+        return res;
+
+  }
+}
+     
+     
