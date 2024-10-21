@@ -1,0 +1,25 @@
+class Solution {
+    void fun(int i, int[] c, List<Integer> temp, int t, List<List<Integer>> res){
+       if(t<0 || i>=c.length){
+        return;
+       }
+       if(t==0){
+        res.add(new ArrayList<>(temp));
+       }
+       else{
+        for(int j=i;j<c.length;j++){
+            temp.add(c[j]);
+            fun(j,c,temp,t-c[j],res);
+            temp.remove(temp.size()-1);
+        }
+       }
+    }
+   
+    public List<List<Integer>> combinationSum(int[] c, int t) {
+        List<List<Integer>> res=new ArrayList<>();
+        List<Integer> temp=new ArrayList<>();
+        fun(0,c,temp,t,res);
+        return res;
+        
+    }
+}
