@@ -1,0 +1,21 @@
+class Solution {
+   static boolean generate(int k, int i, int[] a, int n){
+        if(k==0){
+          return true;
+      }
+      if(i>=n || k<0) return false;
+     
+     if(generate(k-a[i],i+1,a,n)){
+         return true;
+     }
+     return generate(k,i+1,a,n);
+    }
+  public static boolean checkSubsequenceSum(int n, int[] arr, int k) {
+    // code here
+  
+  return generate(k,0,arr,n);
+   
+
+  }
+}
+     
