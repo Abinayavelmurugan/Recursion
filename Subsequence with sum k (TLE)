@@ -1,0 +1,24 @@
+class Solution {
+   static void generate(List<List<Integer>> res, List<Integer> temp, int k, int i, int[] a, int n){
+      if(i>n || k<0) return;
+      if(k==0){
+          res.add(new ArrayList<>(temp));
+          return;
+      }
+      else{
+          for(int j=i;i<n;i++){
+              temp.add(a[j]);
+              generate(res,temp,k-a[j],i+1,a,n);
+              temp.remove(temp.size()-1);
+          }
+      }
+    }
+  public static boolean checkSubsequenceSum(int n, int[] arr, int k) {
+    // code here
+  List<List<Integer>> res = new ArrayList<>();
+   generate(res,new ArrayList<>(),k,0,arr,n);
+    if(res.size()>0) return true;
+    return false;
+
+  }
+}
