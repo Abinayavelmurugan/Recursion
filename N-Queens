@@ -1,0 +1,46 @@
+class Solution { 
+    List<String> construct(char[][] a){
+        List<String> temp=new LinkedList<>();
+        for(int i=0;i<a.length;i++){
+            String s=new String(a[i]);
+            temp.add(s);
+        }
+        return temp;
+    }
+    void solve(List<List<String>> ans,char[][] a,int n, int col,int[] x, int[] y,int[] z){
+        if(col==a.length){
+            ans.add(construct(a));
+            return;
+        }
+        for(int row=0;row<a.length;row++){
+            if(x[row]==0 && y[row+col]==0 && z[n-1+col-row]==0){
+                a[row][col]='Q';
+                x[row]=1;
+                y[row+col]=1;
+                z[(n-1)+(col-row)]=1;
+                solve(ans,a,n,col+1,x,y,z);
+                a[row][col]='.';
+                x[row]=0;
+                y[row+col]=0;
+                z[(n-1)+(col-row)]=0;
+            }
+        }
+    }
+
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> ans = new ArrayList<>();
+        char[][] board = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                board[i][j] = '.';
+            }
+        }
+        int[] leftrow=new int[n];
+        int[] leftup=new int[2*n-1];
+        int[] leftdown=new int[2*n-1];
+        solve(ans,board,n,0,leftrow,leftup,leftdown);
+        return ans;
+    
+
+    }
+}
